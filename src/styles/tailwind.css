@@ -13,3 +13,15 @@
 /* Stop purging. */
 
 /* Your own custom utilities */
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.modal {
+  transition: opacity 0.25s ease;
+}
+body.modal-active {
+  overflow-x: hidden;
+  overflow-y: visible !important;
+}
