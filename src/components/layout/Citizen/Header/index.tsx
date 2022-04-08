@@ -99,6 +99,14 @@ export default function Header() {
             </span>
           </button>
         </a>
+
+        <a href="/approved/applications">
+          <button className="flex gap-x-2 items-center border-2 rounded-2xl  px-4 text-gray-700  hover:text-green-800 hover:border-green-900">
+            <span className="inline-block pt-0.5 leading-6 tex-bold uppercase ">
+              Approved application
+            </span>
+          </button>
+        </a>
       </div>
 
       {/* model  */}

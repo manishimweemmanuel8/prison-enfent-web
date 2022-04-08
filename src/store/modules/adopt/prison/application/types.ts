@@ -1,5 +1,6 @@
 export const ERRORS = "ERRORS";
 export const GET_ALL_APPLICATIONS = "GET_ALL_APPLICATIONS";
+export const GET_ALL_APPROVED_APPLICATIONS = "GET_ALL_APPROVED_APPLICATIONS";
 export const GET_APPLICATION = "GET_APPLICATION";
 export const UPDATE_APPLICATION = "UPDATE_APPLICATION";
 
@@ -37,6 +38,13 @@ interface IApplicationList {
   };
 }
 
+interface IApprovedApplicationList {
+  type: typeof GET_ALL_APPROVED_APPLICATIONS;
+  payload: {
+    approvedApplications: IApplication[];
+  };
+}
+
 interface IGetApplication {
   type: typeof GET_APPLICATION;
   payload: {
@@ -55,4 +63,5 @@ export type ApplicationType =
   | IWriteErrors
   | IApplicationList
   | IGetApplication
-  | IUpdateApplication;
+  | IUpdateApplication
+  | IApprovedApplicationList;

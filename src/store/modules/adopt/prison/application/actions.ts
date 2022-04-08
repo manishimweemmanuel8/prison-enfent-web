@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   ERRORS,
   GET_ALL_APPLICATIONS,
+  GET_ALL_APPROVED_APPLICATIONS,
   GET_APPLICATION,
   IApplication,
 } from "./types";
@@ -58,7 +59,6 @@ export const getApplication =
       const { data } = await axios.get(URL);
       console.log(data);
 
-
       if (data.statusCode === 200) {
         showSuccessMessage(data.message);
         dispatchHandler({
@@ -90,10 +90,41 @@ export const updateApplication =
 
       const { data } = await axios.patch(URL, formData);
 
-
       if (data.statusCode === 201) {
         showSuccessMessage(data.message);
         history.push("/prison/notAdopted/child");
+      }
+    } catch (error: any) {
+      if (error) {
+        const data = error.response.data.message;
+        showErrorMessage(data);
+        return dispatchHandler({
+          type: ERRORS,
+          data,
+          dispatch,
+        });
+      }
+    }
+  };
+
+export const getApprovedApplication =
+  (history: any): AppThunk =>
+  async (dispatch) => {
+    dispatchHandler({ type: ERRORS, data: null, dispatch });
+    try {
+      const URL = `/application/profile`;
+
+      const { data } = await axios.get(URL);
+      console.log(data);
+
+      if (data.statusCode === 200) {
+        showSuccessMessage(data.message);
+        dispatchHandler({
+          type: GET_ALL_APPROVED_APPLICATIONS,
+          data: data.payload,
+          dispatch,
+        });
+        history.push(`/approved/applications`);
       }
     } catch (error: any) {
       if (error) {
