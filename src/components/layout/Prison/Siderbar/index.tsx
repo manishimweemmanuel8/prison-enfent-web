@@ -24,7 +24,7 @@ export default function Sidebar() {
         </svg>
       </button>
       <a href="#" className="flex gap-y-5 pt-8 items-center">
-        <h4 className="text-green-900 font-bold">PRISON KID SUPPORT</h4>
+        <h4 className="text-green-900 font-bold">Baby behind the bars</h4>
       </a>
       <ul className="flex flex-col gap-y-4 pt-8  pb-60">
         <li className=" px-2   ">

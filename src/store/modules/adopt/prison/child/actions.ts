@@ -22,30 +22,30 @@ const showSuccessMessage = (message: string) => {
 
 export const createChild =
   (formData: IChild, history: any): AppThunk =>
-  async (dispatch) => {
-    dispatchHandler({ type: ERRORS, data: null, dispatch });
+    async (dispatch) => {
+      dispatchHandler({ type: ERRORS, data: null, dispatch });
 
-    try {
-      const URL = "/child";
+      try {
+        const URL = "/child";
 
-      const { data } = await axios.post(URL, formData);
+        const { data } = await axios.post(URL, formData);
 
-      if (data.statusCode === 201) {
-        showSuccessMessage(data.message);
-        history.push("/prison/child");
+        if (data.statusCode === 201) {
+          showSuccessMessage(data.message);
+          history.push("/prison/child");
+        }
+      } catch (error: any) {
+        if (error) {
+          const data = error.response.data.message;
+          showErrorMessage(data);
+          return dispatchHandler({
+            type: ERRORS,
+            data,
+            dispatch,
+          });
+        }
       }
-    } catch (error: any) {
-      if (error) {
-        const data = error.response.data.message;
-        showErrorMessage(data);
-        return dispatchHandler({
-          type: ERRORS,
-          data,
-          dispatch,
-        });
-      }
-    }
-  };
+    };
 
 export const getChildren = (): AppThunk => async (dispatch) => {
   dispatchHandler({ type: ERRORS, data: null, dispatch });
@@ -53,6 +53,8 @@ export const getChildren = (): AppThunk => async (dispatch) => {
     const URL = "/child";
 
     const { data } = await axios.get(URL);
+
+    console.log(data);
     if (data.statusCode === 200) {
       showSuccessMessage(data.message);
       dispatchHandler({
@@ -107,6 +109,8 @@ export const getNotAdoptedChildren = (): AppThunk => async (dispatch) => {
     const URL = "/adopted/child/not";
 
     const { data } = await axios.get(URL);
+
+    console.log(data);
     if (data.statusCode === 200) {
       showSuccessMessage(data.message);
       dispatchHandler({
@@ -130,90 +134,90 @@ export const getNotAdoptedChildren = (): AppThunk => async (dispatch) => {
 
 export const getChild =
   (childId: string, history: any, image: boolean): AppThunk =>
-  async (dispatch) => {
-    dispatchHandler({ type: ERRORS, data: null, dispatch });
-    try {
-      const URL = `/child/${childId}`;
+    async (dispatch) => {
+      dispatchHandler({ type: ERRORS, data: null, dispatch });
+      try {
+        const URL = `/child/${childId}`;
 
-      const { data } = await axios.get(URL);
+        const { data } = await axios.get(URL);
 
-      if (data.statusCode === 200) {
-        showSuccessMessage(data.message);
-        dispatchHandler({
-          type: GET_CHILD,
-          data: data.payload,
-          dispatch,
-        });
-        if (image) {
-          history.push(`/prison/child/image/${childId}`);
-        } else {
-          history.push(`/prison/child/${childId}`);
+        if (data.statusCode === 200) {
+          showSuccessMessage(data.message);
+          dispatchHandler({
+            type: GET_CHILD,
+            data: data.payload,
+            dispatch,
+          });
+          if (image) {
+            history.push(`/prison/child/image/${childId}`);
+          } else {
+            history.push(`/prison/child/${childId}`);
+          }
+        }
+      } catch (error: any) {
+        if (error) {
+          const data = error.response.data.message;
+          showErrorMessage(data);
+          return dispatchHandler({
+            type: ERRORS,
+            data,
+            dispatch,
+          });
         }
       }
-    } catch (error: any) {
-      if (error) {
-        const data = error.response.data.message;
-        showErrorMessage(data);
-        return dispatchHandler({
-          type: ERRORS,
-          data,
-          dispatch,
-        });
-      }
-    }
-  };
+    };
 
 export const updateChild =
   (childId: any, formData: IChild, history: any): AppThunk =>
-  async (dispatch) => {
-    dispatchHandler({ type: ERRORS, data: null, dispatch });
-    try {
-      const URL = `/child/${childId}`;
+    async (dispatch) => {
+      dispatchHandler({ type: ERRORS, data: null, dispatch });
+      try {
+        const URL = `/child/${childId}`;
 
-      const { data } = await axios.patch(URL, formData);
+        const { data } = await axios.patch(URL, formData);
 
-      if (data.statusCode === 201) {
-        showSuccessMessage(data.message);
-        history.push("/prison/child");
+        if (data.statusCode === 201) {
+          showSuccessMessage(data.message);
+          history.push("/prison/child");
+        }
+      } catch (error: any) {
+        if (error) {
+          const data = error.response.data.message;
+          showErrorMessage(data);
+          return dispatchHandler({
+            type: ERRORS,
+            data,
+            dispatch,
+          });
+        }
       }
-    } catch (error: any) {
-      if (error) {
-        const data = error.response.data.message;
-        showErrorMessage(data);
-        return dispatchHandler({
-          type: ERRORS,
-          data,
-          dispatch,
-        });
-      }
-    }
-  };
+    };
 
 export const uploadImage =
   (childId: any, information: any, history: any): AppThunk =>
-  async (dispatch) => {
-    dispatchHandler({ type: ERRORS, data: null, dispatch });
-    try {
-      const URL = `/child/uploadImage/${childId}`;
+    async (dispatch) => {
+      dispatchHandler({ type: ERRORS, data: null, dispatch });
+      try {
+        const URL = `/child/uploadImage/${childId}`;
 
-      const file = information.name;
-      const formData = new FormData();
-      formData.append("file", information);
+        const file = information.name;
+        const formData = new FormData();
+        formData.append("file", information);
 
-      const { data } = await axios.post(URL, formData);
-      if (data.statusCode === 200) {
-        showSuccessMessage(data.message);
-        history.push("/prison/child");
+        const { data } = await axios.post(URL, formData);
+        if (data.statusCode === 200) {
+          showSuccessMessage(data.message);
+          history.push("/prison/child");
+        }
+      } catch (error: any) {
+        if (error) {
+          const data = error.response.data.message;
+          showErrorMessage(data);
+          return dispatchHandler({
+            type: ERRORS,
+            data,
+            dispatch,
+          });
+        }
       }
-    } catch (error: any) {
-      if (error) {
-        const data = error.response.data.message;
-        showErrorMessage(data);
-        return dispatchHandler({
-          type: ERRORS,
-          data,
-          dispatch,
-        });
-      }
-    }
-  };
+    };

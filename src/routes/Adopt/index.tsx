@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import ApprovedApplication from "../../pages/modules/adopt/citizen/application/List";
+import LeaderEditApplication from "../../pages/modules/adopt/citizen/Leader";
 import ChildrenToAdoptByPrison from "../../pages/modules/adopt/citizen/listByPrison";
 import EditApplication from "../../pages/modules/adopt/prison/application/Edit";
 import ChildApplication from "../../pages/modules/adopt/prison/application/List";
@@ -38,6 +39,8 @@ export default function AdoptRoutes(props: any) {
       <Route path="/prison/applications/:id" exact component={EditApplication} />
       <Route path="/prison/adopted/child/:id" exact component={ChildrenToAdoptByPrison} />
       <Route path="/approved/applications" exact component={ApprovedApplication} />
+
+      <Route path="/verification/form/:id" exact component={LeaderEditApplication} />
 
 
     </Switch>

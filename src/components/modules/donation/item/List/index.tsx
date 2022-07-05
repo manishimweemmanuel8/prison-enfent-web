@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getItem } from "../../../../../store/modules/donation/item/actions";
 import { IItem } from "../../../../../store/modules/donation/item/types";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 interface ItemProps {
   items: IItem[];
@@ -24,6 +26,63 @@ export default function ItemListComponent(props: ItemProps) {
   // const handleViewApplicationByChild = (id: any) => {
   //   dispatch(getPrisonApplication(id,history));
   // };
+  const exportItemsPdfData = () => {
+    let doc = new jsPDF();
+    let now = new Date();
+
+    // doc.setFont(, "bold");
+    doc.setFontSize(12);
+    doc.text("PRISON KIDS SUPPORT", 80, 20);
+    doc.setDrawColor(0, 255, 0);
+    doc.line(15, 25, 195, 25);
+
+    doc.setDrawColor(0, 255, 0);
+    doc.line(15, 25, 195, 25);
+
+    // doc.text(`Print date : ${now.toString()}`, 80, 35);
+
+    doc.text("Items", 80, 45);
+    // doc.line(75, 47, 50, 25);
+
+    // doc.autoTable({
+    //   styles: { fontSize: 9 },
+    //   theme: "grid",
+    //   margin: { top: 40 },
+    //   html: "#my-table",
+    // });
+    autoTable(doc, {
+      styles: { fontSize: 9 },
+      theme: "grid",
+      margin: { top: 60 },
+      html: "#my-table-items",
+    });
+
+    doc.text(`Print Date:${now}`, 15, 250);
+    doc.text(`Printed By:${localStorage.getItem("EMAIL")}`, 15, 256);
+
+    // doc.setTextColor(255, 0, 0);
+    addFooters(doc);
+
+    doc.output("dataurlnewwindow");
+  };
+
+  const addFooters = (doc: any) => {
+    const pageCount = doc.internal.getNumberOfPages();
+
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(8);
+    for (var i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.text(
+        "Page " + String(i) + " of " + String(pageCount),
+        doc.internal.pageSize.width / 2,
+        287,
+        {
+          align: "center",
+        }
+      );
+    }
+  };
 
   return (
     <div className="flex-1 pb-8">
@@ -33,7 +92,30 @@ export default function ItemListComponent(props: ItemProps) {
             Items{" "}
           </h1>
         </div>
-        <a href="/admin/item/create">
+        <button
+          className="inline-flex gap-x-2 items-center py-2.5 px-6 text-white bg-green-800 rounded-xl hover:bg-green-600 focus:ring-2 focus:bg-green-500 focus:ring-offset-1"
+          onClick={exportItemsPdfData}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-4"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+
+          <span className="text-sm font-semibold tracking-wide">
+            Print report
+          </span>
+        </button>
+        <a href="/admin/item/create" >
           <button className="inline-flex gap-x-2 items-center py-2.5 px-6 text-white bg-green-800 rounded-xl hover:bg-green-600 focus:ring-2 focus:bg-green-500 focus:ring-offset-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,12 +139,12 @@ export default function ItemListComponent(props: ItemProps) {
         </a>
       </div>
 
-      <table className="w-full border-b border-gray-200">
+      <table className="w-full border-b border-gray-200" id="my-table-items">
         <thead>
           <tr className="text-sm font-medium text-gray-700 border-b border-gray-200">
             <td className="pl-10">
               <div className="flex items-left gap-x-4">
-                <span> Image</span>
+                <span> No</span>
               </div>
             </td>
             <td className="py-4 px-4 text-left">Names</td>
@@ -70,14 +152,15 @@ export default function ItemListComponent(props: ItemProps) {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => (
+          {items.map((item,count) => (
             <tr className="hover:bg-gray-100 transition-colors group">
               <td className="">
-                <img
+                {count+=1}
+                {/* <img
                   className="w-24 h-24"
                   src={`http://localhost:3001/api/v1/item/image/${item.image}`}
                   alt=""
-                />
+                /> */}
               </td>
               <td className="font-medium text-left">{item.names}</td>
               <td>

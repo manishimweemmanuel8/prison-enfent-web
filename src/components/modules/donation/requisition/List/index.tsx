@@ -146,7 +146,7 @@ export default function RequisitionListComponent(props: RequisitionProps) {
           <tr className="text-sm font-medium text-gray-700 border-b border-gray-200">
             <td className="pl-10">
               <div className="flex items-left gap-x-4">
-                <span> Image</span>
+                <span>No</span>
               </div>
             </td>
             <td className="py-4 px-4 text-left">Names</td>
@@ -158,14 +158,15 @@ export default function RequisitionListComponent(props: RequisitionProps) {
           </tr>
         </thead>
         <tbody>
-          {requisitions.map((requisition) => (
+          {requisitions.map((requisition,count) => (
             <tr className="hover:bg-gray-100 transition-colors group">
               <td className="">
-                <img
+                {count+=1}
+                {/* <img
                   className="w-24 h-24"
                   src={`http://localhost:3001/api/v1/item/image/${requisition.item.image}`}
                   alt=""
-                />
+                /> */}
               </td>
               <td className="font-medium text-left">
                 {requisition.item.names}

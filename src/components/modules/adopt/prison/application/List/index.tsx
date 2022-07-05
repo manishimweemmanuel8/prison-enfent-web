@@ -38,6 +38,9 @@ export default function ChildApplicationListComponent(props: ChildProps) {
             <td className="py-4 px-4 text-left">Adopt names</td>
             <td className="py-4 px-4 text-left">From</td>
             <td className="py-4 px-4 text-left">To</td>
+            <td className="py-4 px-4 text-left">Leader Name</td>
+            <td className="py-4 px-4 text-left">Leader Phone</td>
+            <td className="py-4 px-4 text-left">Testimony</td>
             <td className="py-4 px-4 text-left">Stage</td>
           </tr>
         </thead>
@@ -52,6 +55,10 @@ export default function ChildApplicationListComponent(props: ChildProps) {
               </td>
               <td className="font-medium text-left">{application.from}</td>
               <td className="font-medium text-left">{application.to}</td>
+              <td className="font-medium text-left">{application.leadName}</td>
+              <td className="font-medium text-left">{application.leadPhone}</td>
+              
+              <td className="font-medium text-left">{application.testimony}</td>
 
               <td>
                 <span className="inline-block w-24 group-hover:hidden">

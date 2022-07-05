@@ -24,6 +24,7 @@ export interface IProfile {
   sector?: string;
   cell?: string;
   village?: string;
+  
 }
 
 interface IICreateProfile {

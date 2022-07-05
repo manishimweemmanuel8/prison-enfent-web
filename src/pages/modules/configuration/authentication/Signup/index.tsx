@@ -15,7 +15,7 @@ export default function Signup(props: IHistory) {
 
   const [state, setState] = React.useState({
     email: "",
-    roles: ["CITIZEN"],
+    roles: "CITIZEN",
     status: true,
   });
 

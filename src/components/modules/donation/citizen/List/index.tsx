@@ -19,6 +19,12 @@ export default function ActiveRequisitionComponent(
 ) {
   const { activeRequisition } = props;
 
+  const [select, setSelect] = React.useState();
+  const donationTypes = [
+    { name: "property", value: "property" },
+    { name: "amount", value: "amount" },
+  ];
+
   const [isOpen, setIsOpen] = React.useState(false);
   const openModal = () => {
     setIsOpen(true);
@@ -39,8 +45,9 @@ export default function ActiveRequisitionComponent(
   const history = useHistory();
 
   const [state, setState] = React.useState({
-    amount: "",
+    amount: 0,
     status: false,
+    donationType:"Select donation type",
     requisitionId: activeRequisition.id,
   });
 
@@ -48,7 +55,9 @@ export default function ActiveRequisitionComponent(
   const data = {
     amount,
     status,
+    donationType:select,
     requisitionId,
+    email:localStorage.getItem("EMAIL"),
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,16 +73,16 @@ export default function ActiveRequisitionComponent(
   return (
     <div>
       <article className="overflow-hidden rounded-2xl border border-gray-100">
-        <div className="flex justify-center items-center bg-gray-50 aspect-square">
+        {/* <div className="flex justify-center items-center bg-gray-50 aspect-square">
           <img
             src={`http://localhost:3001/api/v1/item/image/${activeRequisition.item.image}`}
             alt=""
             className="h-80 w-80"
           />
-        </div>
+        </div> */}
         <div className="flex flex-col p-6">
           <div className="flex justify-between items-center">
-            <h2 className="font-semibold tracking-wide">
+            <h2 className="font-semibold tracking-wide uppercase">
               {activeRequisition.item.names}
             </h2>
             <span className="flex gap-x-1 items-center">
@@ -110,6 +119,9 @@ export default function ActiveRequisitionComponent(
                   closeModle={closeModal}
                   onChange={onChange}
                   state={state}
+                  select={select}
+                  setSelect={setSelect}
+                  donationTypes={donationTypes}
                   onSubmit={onSubmit}
                   item={activeRequisition.item.names}
                 />

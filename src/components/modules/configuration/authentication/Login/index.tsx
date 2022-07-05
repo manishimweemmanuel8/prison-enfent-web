@@ -15,7 +15,7 @@ export default function LoginComponent(props: Props) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div className="font-medium self-center text-xl sm:text-3xl text-gray-700 pb-16">
-        PRISON KIDS SUPPORT
+        BABY BEHIND THE BARS
       </div>
       <div
         className="

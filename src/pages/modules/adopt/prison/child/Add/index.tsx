@@ -19,17 +19,21 @@ export default function AddChild(props: IHistory) {
     motherNames: "",
     location: "",
     dob: "",
+    from:"",
+    to:"",
     needAdoptation: false,
   });
   const [modalState, setModalState] = React.useState({
     open: false,
   });
-  const { names, dob, location, motherNames, needAdoptation } = state;
+  const { names, dob, location, motherNames, needAdoptation,from,to } = state;
   const data = {
     names,
     dob,
     location,
     motherNames,
+    from,
+    to,
     needAdoptation: checked,
   };
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
