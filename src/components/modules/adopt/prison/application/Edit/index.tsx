@@ -3,11 +3,14 @@ import { IApplication } from "../../../../../../store/modules/adopt/prison/appli
 type EditApplicationProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   state: IApplication;
+  stages: any;
+  select: any;
+  setSelect: any;
   onSubmit: (e: React.FormEvent) => void;
 };
 
 export default function EditApplicationComponent(props: EditApplicationProps) {
-  const { onChange, onSubmit, state } = props;
+  const { onChange, onSubmit, state, select, setSelect, stages } = props;
 
   const { stage } = state;
   return (
@@ -36,47 +39,30 @@ export default function EditApplicationComponent(props: EditApplicationProps) {
           <form action="#" onSubmit={onSubmit}>
             <div className="flex flex-col md:flex-row md:mx-8 ">
               <div className="mb-5 px-4 w-3/5">
-                <label
-                  // for="email"
-                  className="mb-1 text-xs tracking-wide text-gray-600"
-                >
-                  Stage:
+                <label className="mb-1 text-xs tracking-wide text-gray-600">
+                  Decision
                 </label>
                 <div className="relative">
-                  <div
+                  <select
                     className="
-              inline-flex
-              items-center
-              justify-center
-              absolute
-              left-0
-              top-0
-              h-full
-              w-10
-              text-gray-400
-            "
-                  ></div>
-
-                  <input
-                    id="stage"
-                    type="text"
-                    name="stage"
-                    className="
-              text-sm
-              placeholder-gray-500
-              pl-10
-              pr-4
-              rounded-2xl
-              border border-gray-400
-              w-full
-              py-2
-              focus:outline-none focus:border-blue-400
-            "
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      onChange(e)
-                    }
-                    value={stage}
-                  />
+            text-sm
+            placeholder-gray-500
+            pl-5
+            pr-4
+            rounded-2xl
+            border border-gray-400
+            w-full
+            py-2
+            focus:outline-none focus:border-blue-400
+          "
+                    value={select}
+                    onChange={(e) => setSelect(e.target.value)}
+                  >
+                    <option value="">Select Decision</option>
+                    {stages.map((data: any) => (
+                      <option value={data.value}>{data.name}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </div>

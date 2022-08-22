@@ -36,14 +36,20 @@ export default function ChildrenComponent(props: ChildProps) {
   const [state, setState] = React.useState({
     from: "",
     to: "",
+    leadName:"",
+    leadPhone:"",
+    leadEmail:"",
     childId: child.id,
     email: localStorage.getItem("EMAIL"),
   });
 
-  const { from, to, childId, email } = state;
+  const { from, to, childId, email,leadEmail,leadName,leadPhone } = state;
   const data = {
-    from,
-    to,
+    from:child.from,
+    to:child.to,
+    leadEmail,
+    leadName,
+    leadPhone,
     childId,
     email,
   };
@@ -80,6 +86,22 @@ export default function ChildrenComponent(props: ChildProps) {
               </span>
             </span>
           </div>
+          <div className="flex justify-between items-center">
+          <span className="text-sm text-gray-400">
+                Adopt from :
+                <span className="text-sm font-semibold tracking-wide text-gray-800">
+                  {child.from}
+                </span>
+              </span>
+            <span className="flex gap-x-1 items-center">
+              <span className="text-sm text-gray-400">
+                Adopt to :
+                <span className="text-sm font-semibold tracking-wide text-gray-800">
+                  {child.to}
+                </span>
+              </span>
+            </span>
+          </div>
           <span className="text-sm text-gray-400">
             Location : <span className="text-gray-600">{child.location}</span>
           </span>
@@ -100,6 +122,7 @@ export default function ChildrenComponent(props: ChildProps) {
                   state={state}
                   onSubmit={onSubmit}
                   child={child.names}
+                 
                 />
               </>
             )}

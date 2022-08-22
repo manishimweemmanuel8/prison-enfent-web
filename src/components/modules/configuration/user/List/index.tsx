@@ -71,9 +71,9 @@ export default function UserListComponent(props: PrisonProps) {
             <tr className="hover:bg-gray-100 transition-colors group">
               <td className="font-medium text-left">{user.email}</td>
               <td className="text-left">
-                {user.roles.map((role: string) => (
-                  <span className="font-medium">{role}</span>
-                ))}
+                {/* {user.roles.map((role: string) => ( */}
+                  <span className="font-medium">{user.roles}</span>
+                {/* ))} */}
               </td>
               <td className="text-left">
                 <span className="font-medium">

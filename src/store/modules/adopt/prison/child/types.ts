@@ -26,6 +26,8 @@ export interface IChild {
   dob?: any;
   file?: string;
   image?: string;
+  from?:any;
+  to?:any;
 }
 
 interface ICreateChild {

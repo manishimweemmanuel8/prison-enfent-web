@@ -22,48 +22,48 @@ const showSuccessMessage = (message: string) => {
 
 export const authActions =
   (formData: ILoginParams, history: any): AppThunk =>
-  async (dispatch) => {
-    dispatchHandler({ type: ERRORS, data: null, dispatch });
-    try {
-      const URL = "/account/login/";
+    async (dispatch) => {
+      dispatchHandler({ type: ERRORS, data: null, dispatch });
+      try {
+        const URL = "/account/login/";
 
-      const { data } = await axios.post(URL, formData);
+        const { data } = await axios.post(URL, formData);
 
-      console.log(data);
+        console.log(data);
 
-      if (data.statusCode === 200) {
-        dispatchHandler({ type: LOGIN, data: data, dispatch });
-        const token: any = jwt_decode(data.payload);
-        localStorage.setItem("TOKEN", data.payload);
-        localStorage.setItem("EMAIL", token.email);
-        showSuccessMessage(data.message);
+        if (data.statusCode === 200) {
+          dispatchHandler({ type: LOGIN, data: data, dispatch });
+          const token: any = jwt_decode(data.payload);
+          localStorage.setItem("TOKEN", data.payload);
+          localStorage.setItem("EMAIL", token.email);
+          showSuccessMessage(data.message);
 
-        for (var val of token.roles) {
-          if (val === "ADMIN") {
+          // for (var val of token.roles) {
+          if (token.roles === "ADMIN") {
             history.push("/admin/dashboard");
           }
 
-          if (val === "PRISON") {
+          if (token.roles === "PRISON") {
             history.push("/prison/dashboard");
           }
-          if (val === "CITIZEN") {
+          if (token.roles === "CITIZEN") {
             history.push("/");
           }
+          // }
+        }
+      } catch (error: any) {
+        if (error) {
+          const data = error.response.data;
+          console.log(error.response.data);
+          showErrorMessage(error.response.data.message);
+          return dispatchHandler({
+            type: ERRORS,
+            data,
+            dispatch,
+          });
         }
       }
-    } catch (error: any) {
-      if (error) {
-        const data = error.response.data;
-        console.log(error.response.data);
-        showErrorMessage(error.response.data.message);
-        return dispatchHandler({
-          type: ERRORS,
-          data,
-          dispatch,
-        });
-      }
-    }
-  };
+    };
 
 export const getUsers = (): AppThunk => async (dispatch) => {
   dispatchHandler({ type: ERRORS, data: null, dispatch });
@@ -94,128 +94,128 @@ export const getUsers = (): AppThunk => async (dispatch) => {
 
 export const getUser =
   (userId: string, history: any, flag: string): AppThunk =>
-  async (dispatch) => {
-    dispatchHandler({ type: ERRORS, data: null, dispatch });
-    try {
-      const URL = `/account/${userId}`;
+    async (dispatch) => {
+      dispatchHandler({ type: ERRORS, data: null, dispatch });
+      try {
+        const URL = `/account/${userId}`;
 
-      const { data } = await axios.get(URL);
-      console.log(data);
+        const { data } = await axios.get(URL);
+        console.log(data);
 
-      if (data.statusCode === 200) {
-        showSuccessMessage(data.message);
-        dispatchHandler({
-          type: GET_USER,
-          data: data.payload,
-          dispatch,
-        });
+        if (data.statusCode === 200) {
+          showSuccessMessage(data.message);
+          dispatchHandler({
+            type: GET_USER,
+            data: data.payload,
+            dispatch,
+          });
 
-        if (flag === "password") {
-          history.push(`/admin/user/changePassword/${userId}`);
+          if (flag === "password") {
+            history.push(`/admin/user/changePassword/${userId}`);
+          }
+          if (flag === "edit") {
+            history.push(`/admin/user/${userId}`);
+          }
         }
-        if (flag === "edit") {
-          history.push(`/admin/user/${userId}`);
+      } catch (error: any) {
+        if (error) {
+          const data = error.response.data.message;
+          showErrorMessage(data);
+          return dispatchHandler({
+            type: ERRORS,
+            data,
+            dispatch,
+          });
         }
       }
-    } catch (error: any) {
-      if (error) {
-        const data = error.response.data.message;
-        showErrorMessage(data);
-        return dispatchHandler({
-          type: ERRORS,
-          data,
-          dispatch,
-        });
-      }
-    }
-  };
+    };
 
 export const updateUser =
   (userId: any, formData: IUser, history: any): AppThunk =>
-  async (dispatch) => {
-    dispatchHandler({ type: ERRORS, data: null, dispatch });
-    try {
-      const URL = `/account/${userId}`;
+    async (dispatch) => {
+      dispatchHandler({ type: ERRORS, data: null, dispatch });
+      try {
+        const URL = `/account/${userId}`;
 
-      const { data } = await axios.patch(URL, formData);
+        const { data } = await axios.patch(URL, formData);
 
-      if (data.statusCode === 201) {
-        showSuccessMessage(data.message);
-        history.push("/admin/users");
+        if (data.statusCode === 201) {
+          showSuccessMessage(data.message);
+          history.push("/admin/users");
+        }
+      } catch (error: any) {
+        if (error) {
+          const data = error.response.data.message;
+          showErrorMessage(data);
+          return dispatchHandler({
+            type: ERRORS,
+            data,
+            dispatch,
+          });
+        }
       }
-    } catch (error: any) {
-      if (error) {
-        const data = error.response.data.message;
-        showErrorMessage(data);
-        return dispatchHandler({
-          type: ERRORS,
-          data,
-          dispatch,
-        });
-      }
-    }
-  };
+    };
 
 export const changeUserPassword =
   (userId: any, formData: ILoginParams, history: any): AppThunk =>
-  async (dispatch) => {
-    dispatchHandler({ type: ERRORS, data: null, dispatch });
-    try {
-      const URL = `/account/changePassword/${userId}`;
+    async (dispatch) => {
+      dispatchHandler({ type: ERRORS, data: null, dispatch });
+      try {
+        const URL = `/account/changePassword/${userId}`;
 
-      const { data } = await axios.patch(URL, formData);
+        const { data } = await axios.patch(URL, formData);
 
-      if (data.statusCode === 201) {
-        showSuccessMessage(data.message);
-        history.push("/admin/users");
+        if (data.statusCode === 201) {
+          showSuccessMessage(data.message);
+          history.push("/admin/users");
+        }
+      } catch (error: any) {
+        if (error) {
+          const data = error.response.data.message;
+          showErrorMessage(data);
+          return dispatchHandler({
+            type: ERRORS,
+            data,
+            dispatch,
+          });
+        }
       }
-    } catch (error: any) {
-      if (error) {
-        const data = error.response.data.message;
-        showErrorMessage(data);
-        return dispatchHandler({
-          type: ERRORS,
-          data,
-          dispatch,
-        });
-      }
-    }
-  };
+    };
 
 export const createUser =
   (formData: IUser, history: any): AppThunk =>
-  async (dispatch) => {
-    dispatchHandler({ type: ERRORS, data: null, dispatch });
+    async (dispatch) => {
+      dispatchHandler({ type: ERRORS, data: null, dispatch });
 
-    try {
-      const URL = "/account";
+      try {
+        const URL = "/account";
 
-      const { data } = await axios.post(URL, formData);
+        const { data } = await axios.post(URL, formData);
 
-      if (data.statusCode === 201) {
-        showSuccessMessage(data.message);
-        for (var val of formData.roles) {
-          if (val === "ADMIN") {
+        if (data.statusCode === 201) {
+          showSuccessMessage(data.message);
+          // for (var val of formData.roles) {
+          if (formData.roles === "ADMIN") {
             history.push("/admin/users");
           }
 
-          if (val === "CITIZEN") {
+          if (formData.roles === "CITIZEN") {
             history.push("/login");
           }
+          // }
+        }
+      } catch (error: any) {
+        if (error) {
+          const data = error.response.data.message;
+          showErrorMessage(data);
+          return dispatchHandler({
+            type: ERRORS,
+            data,
+            dispatch,
+          });
         }
       }
-    } catch (error: any) {
-      if (error) {
-        const data = error.response.data.message;
-        showErrorMessage(data);
-        return dispatchHandler({
-          type: ERRORS,
-          data,
-          dispatch,
-        });
-      }
-    }
-  };
+    };
 
 export const SignOut = () => {
   localStorage.removeItem("TOKEN");

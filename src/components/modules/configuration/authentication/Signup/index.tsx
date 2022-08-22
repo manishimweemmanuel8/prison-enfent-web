@@ -15,7 +15,7 @@ export default function SignupComponent(props: Props) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div className="font-medium self-center text-xl sm:text-3xl text-gray-700 pb-16">
-        PRISON KIDS SUPPORT
+        BABY BEHIND THE BARS
       </div>
       <div
         className="
@@ -33,7 +33,7 @@ export default function SignupComponent(props: Props) {
       "
       >
         <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
-          Welcome to prison kids support
+          Welcome to baby behind the bars system
         </div>
         <div className="mt-4 self-center text-xl sm:text-sm text-gray-800">
           Enter your valid email to get full credentials on your email

@@ -23,7 +23,7 @@ export default function ChildrenToAdopt() {
         <h1 className="text-2xl font-bold text-gray-900">Children to adopt</h1>
         <div className="grid grid-cols-3 gap-x-6 py-6">
           {children.map((child) => (
-            <ChildrenComponent child={child} />
+            <ChildrenComponent child={child} /> 
           ))}
         </div>
       </section>

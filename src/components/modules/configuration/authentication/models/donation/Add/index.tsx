@@ -7,13 +7,25 @@ type AddDonationProps = {
   closeModle: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
   state: IDonation;
+  donationTypes: any;
+  select: any;
+  setSelect: any;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   item: any;
 };
 
 export default function AddDonation(props: AddDonationProps) {
-  const { closeModle, state, onChange, onSubmit, item } = props;
-  const { amount } = state;
+  const {
+    closeModle,
+    state,
+    onChange,
+    onSubmit,
+    item,
+    donationTypes,
+    select,
+    setSelect,
+  } = props;
+  const { amount, donationType } = state;
   return (
     <div
       className="py-12  transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0  "
@@ -33,6 +45,31 @@ export default function AddDonation(props: AddDonationProps) {
           <div className="mt-10">
             <form action="#" onSubmit={onSubmit}>
               <div className="flex flex-col mb-5">
+                <label className="mb-1 text-xs tracking-wide text-gray-600">
+                  Select donation type
+                </label>
+                <div className="relative">
+                  <select
+                    className="
+            text-sm
+            placeholder-gray-500
+            pl-5
+            pr-4
+            rounded-2xl
+            border border-gray-400
+            w-full
+            py-2
+            focus:outline-none focus:border-blue-400
+          "
+                    value={select}
+                    onChange={(e) => setSelect(e.target.value)}
+                  >
+                    <option value="">Select donation type</option>
+                    {donationTypes.map((data: any) => (
+                      <option value={data.value}>{data.name}</option>
+                    ))}
+                  </select>
+                </div>
                 <label className="mb-1 text-xs tracking-wide text-gray-600">
                   Amount:
                 </label>

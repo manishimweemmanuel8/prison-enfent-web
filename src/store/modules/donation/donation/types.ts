@@ -16,7 +16,8 @@ export interface ISubErrors {
 export interface IDonation {
   id?: string;
   requisitionId?: string;
-  amount?: string;
+  amount?: number;
+  donationType?:string;
   status?: boolean;
   requisition?: any;
   profile?: any;

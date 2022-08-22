@@ -248,6 +248,35 @@ export default function AddProfile(props: EditProfileProps) {
                 value={village}
                   />
                 </div>
+
+                <label
+                  // for="email"
+                  className="mb-1 text-xs tracking-wide text-gray-600"
+                >
+                  Integrite certificate:
+                </label>
+                <div className="relative">
+                  <input
+                    id="certificate"
+                    type="file"
+                    name="certificate"
+                    className="
+                  text-sm
+                  placeholder-gray-500
+                  pl-10
+                  pr-4
+                  rounded-2xl
+                  border border-gray-400
+                  w-full
+                  py-2
+                  focus:outline-none focus:border-green-900
+                "
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onChange(e)
+                }
+                // value={village}
+                  />
+                </div>
               </div>
 
               <div className="flex w-full">

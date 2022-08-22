@@ -14,6 +14,8 @@ export interface ISubErrors {
 export interface IChild {
   id?: string;
   names?: string;
+  from?:any;
+  to?:any;
   motherNames?: string;
   location?: string;
   needAdoptation?: boolean;

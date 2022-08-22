@@ -12,8 +12,13 @@ export interface ISubErrors {
 
 export interface IApplication {
   id?: string;
-  from: string;
-  to: string;
+  from?: string;
+  to?: string;
+  stage?:string;
+  testimony?:string;
+  leadName?:string;
+  leadPhone?:string;
+  leadEmail?:string;
   childId?: string;
   email?: any;
 }

@@ -124,6 +124,8 @@ export default function RequisitionDonationListComponent(props: RequisitionDonat
           <tr className="text-sm font-medium text-gray-700 border-b border-gray-200">
            
             <td className="py-4 px-4 text-left">Donor</td>
+
+            <td className="py-4 px-4 text-left">Donation type</td>
             <td className="py-4 px-4 text-left">Amount</td>
             <td className="py-4 px-4 text-left">Status</td>
             <td className="py-4 px-4 text-left">Create date</td>
@@ -136,6 +138,8 @@ export default function RequisitionDonationListComponent(props: RequisitionDonat
               <td className="font-medium text-left">
                 {donation.profile.names}
               </td>
+              <td className="font-medium text-left">{donation.donationType}</td>
+
               <td className="font-medium text-left">{donation.amount}</td>
              
 

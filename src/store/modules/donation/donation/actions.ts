@@ -23,15 +23,21 @@ export const createDonation =
   async (dispatch) => {
     dispatchHandler({ type: ERRORS, data: null, dispatch });
 
+    console.log(formData);
+
     try {
       const URL = "/donation";
 
       const { data } = await axios.post(URL, formData);
-      console.log(data);
 
       if (data.statusCode === 201) {
         showSuccessMessage(data.message);
-        window.location.replace("https://flutterwave.com/rw/");
+
+        if (formData.amount == 0) {
+          history.push(`/donation`);
+        } else {
+          window.location.replace("https://ravesandbox.flutterwave.com/donate/xxkc8saaycpw");
+        }
       }
     } catch (error: any) {
       if (error) {

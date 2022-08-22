@@ -162,14 +162,15 @@ export default function ChildListComponent(props: ChildProps) {
           </tr>
         </thead>
         <tbody>
-          {children.map((child) => (
+          {children.map((child,count) => (
             <tr className="hover:bg-gray-100 transition-colors group">
               <td className="">
-                <img
+                {count+=1}
+                {/* <img
                   className="w-24 h-24"
                   src={`http://localhost:3001/api/v1/child/image/${child.image}`}
                   alt=""
-                />
+                /> */}
               </td>
               <td className="font-medium text-left">{child.names}</td>
               <td className="font-medium text-left">{child.motherNames}</td>

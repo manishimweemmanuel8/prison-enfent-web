@@ -69,7 +69,12 @@ export default function AddRequisitionComponent(props: AddRequisitionProps) {
                     value={select}
                     onChange={(e) => setSelect(e.target.value)}
                   >
-                    
+                     <option
+                      
+                      value=""
+                    >
+                      Select donation
+                    </option>
                     {items.map((data) => (
                       <option
                       

@@ -21,9 +21,19 @@ export default function EditApplication(props: IHistory) {
     stage: application.stage,
   });
 
+  const [select, setSelect] = React.useState();
+
+
+  const stages = [
+    { name: "PENDING", value: "PENDING" },
+    { name: "IN_PROCESS", value: "IN_PROCESS" },
+    { name: "APPROVED", value: "APPROVED" },
+    { name: "DENY", value: "DENY" },
+  ];
+
   const { stage } = state;
   const data = {
-    stage,
+    stage:select,
   };
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -45,6 +55,9 @@ export default function EditApplication(props: IHistory) {
         onChange={onChange}
         state={state}
         onSubmit={onSubmit}
+        stages={stages}
+        select={select}
+        setSelect={setSelect}
       />
     </PrisonLayout>
   );

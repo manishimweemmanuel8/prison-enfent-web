@@ -23,9 +23,14 @@ export default function EditDonation(props: IHistory) {
 
   const [state, setState] = React.useState({
     status: donation.status,
+    amount:donation.amount,
   });
+
+  const { amount } = state;
+
   const data = {
     status: checked,
+    amount
   };
 
   const onSubmit = (event: React.FormEvent) => {

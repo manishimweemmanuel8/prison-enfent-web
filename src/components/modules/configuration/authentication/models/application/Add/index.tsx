@@ -8,11 +8,12 @@ type AddApplicationProps = {
   state: IApplication;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   child: any;
+
 };
 
 export default function AddApplication(props: AddApplicationProps) {
   const { closeModle, state, onChange, onSubmit, child } = props;
-  const { from, to } = state;
+  const { leadEmail,leadName,leadPhone} = state;
   return (
     <div
       className="py-12  transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0  "
@@ -32,7 +33,87 @@ export default function AddApplication(props: AddApplicationProps) {
           <div className="mt-10">
             <form action="#" onSubmit={onSubmit}>
               <div className="flex flex-col mb-5">
+
+              <label className="mb-1 text-xs tracking-wide text-gray-600">
+                  Leader Names:
+                </label>
+                <div className="relative">
+                  <input
+                    id="leadName"
+                    type="text"
+                    name="leadName"
+                    className="
+                  text-sm
+                  placeholder-gray-500
+                  pl-10
+                  pr-4
+                  rounded-2xl
+                  border border-gray-400
+                  w-full
+                  py-2
+                  focus:outline-none focus:border-green-900
+                "
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      onChange(e)
+                    }
+                    value={leadName}
+                  />
+                </div>
+
                 <label className="mb-1 text-xs tracking-wide text-gray-600">
+                  Leader Phone:
+                </label>
+                <div className="relative">
+                  <input
+                    id="leadPhone"
+                    type="number"
+                    name="leadPhone"
+                    className="
+                  text-sm
+                  placeholder-gray-500
+                  pl-10
+                  pr-4
+                  rounded-2xl
+                  border border-gray-400
+                  w-full
+                  py-2
+                  focus:outline-none focus:border-green-900
+                "
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      onChange(e)
+                    }
+                    value={leadPhone}
+                  />
+                </div>
+
+                <label className="mb-1 text-xs tracking-wide text-gray-600">
+                  Leader Email:
+                </label>
+                <div className="relative">
+                  <input
+                    id="leadEmail"
+                    type="text"
+                    name="leadEmail"
+                    className="
+                  text-sm
+                  placeholder-gray-500
+                  pl-10
+                  pr-4
+                  rounded-2xl
+                  border border-gray-400
+                  w-full
+                  py-2
+                  focus:outline-none focus:border-green-900
+                "
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      onChange(e)
+                    }
+                    value={leadEmail}
+                  />
+                </div>
+
+
+                {/* <label className="mb-1 text-xs tracking-wide text-gray-600">
                   From:
                 </label>
                 <div className="relative">
@@ -84,6 +165,35 @@ export default function AddApplication(props: AddApplicationProps) {
                       onChange(e)
                     }
                     value={to}
+                  />
+                </div> */}
+
+                <label
+                  // for="email"
+                  className="mb-1 text-xs tracking-wide text-gray-600"
+                >
+                  Integrate certificate:
+                </label>
+                <div className="relative">
+                  <input
+                    id="certificate"
+                    type="file"
+                    name="certificate"
+                    className="
+                  text-sm
+                  placeholder-gray-500
+                  pl-10
+                  pr-4
+                  rounded-2xl
+                  border border-gray-400
+                  w-full
+                  py-2
+                  focus:outline-none focus:border-green-900
+                "
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      onChange(e)
+                    }
+                    // value={to}
                   />
                 </div>
               </div>

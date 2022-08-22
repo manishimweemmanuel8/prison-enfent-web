@@ -85,6 +85,8 @@ export const updateApplication =
   (applicationId: any, formData: IApplication, history: any): AppThunk =>
   async (dispatch) => {
     dispatchHandler({ type: ERRORS, data: null, dispatch });
+    console.log(applicationId);
+    console.log(formData);
     try {
       const URL = `/application/${applicationId}`;
 
@@ -92,7 +94,13 @@ export const updateApplication =
 
       if (data.statusCode === 201) {
         showSuccessMessage(data.message);
-        history.push("/prison/notAdopted/child");
+        if(!formData.testimony){
+          history.push("/prison/notAdopted/child");
+        }else{
+          history.push("/");
+
+        }
+       
       }
     } catch (error: any) {
       if (error) {

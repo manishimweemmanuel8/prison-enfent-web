@@ -17,6 +17,10 @@ export interface IApplication {
   id?: string;
   from?: string;
   to?: string;
+  testimony?:string;
+  leadName?:string;
+  leadPhone?:string;
+  leadEmail?:string;
   childId?: string;
   email?: any;
   profile?: any;

@@ -26,7 +26,7 @@ export const createApplication =
 
       if (data.statusCode === 201) {
         showSuccessMessage(data.message);
-        history.push("/");
+        history.push("/donation");
       }
     } catch (error: any) {
       if (error) {
